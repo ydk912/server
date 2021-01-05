@@ -1,0 +1,163 @@
+<html>
+<head>
+<title>
+	업다운 겜
+</title>
+</head>
+<style>
+	body{
+		width: 100%;
+		height: 100%;
+		margin: 0px;
+		padding: 0px;
+	}
+h1{
+	color:orange;
+	background-color:black;
+	text-decoration:none;
+	width:100%;
+	text-align: center;
+}
+.s{
+margin:0px;
+padding:0px;
+}
+	div{
+		text-align: center;
+		height: auto;
+	}
+	#asdff{
+		transform-origin: right;
+		position: fixed;
+		bottom: 0px;
+		right: 0px;
+		text-align: left;
+	}
+	a{
+		
+		text-decoration: none;
+	}
+	.aa{
+		background-color: transparent;
+		color: red;
+		transition: ease 0.5s, background-color 0.5s;
+	}
+	.aa:hover{
+		background-color: red;
+		color:white;
+	}
+	button{
+		position: relative;
+		left: 0px;
+		transition: ease 0.5s;
+	}
+	button:hover{
+		transform: translate(0px,2px);
+	}
+	select{
+		position: relative;
+		left: 0px;
+		transition: ease 0.5s;
+	}
+	select:hover{
+		transform: translate(0px,2px);
+	}
+</style>
+<body>
+	<h1 class="s">숫자 맞추기 겜</h1>
+	<br>
+	<div>
+	<span>숫자</span>
+	<select id="ran">
+		<option>
+			1~100
+		</option>
+		<option>
+			1~1000
+		</option>
+		<option>
+			1~10000
+		</option>
+	</select>
+	<span>기회</span>
+	<select id="chan">
+		<option>
+			10
+		</option>
+		<option>
+			15
+		</option>
+		<option>
+			20
+		</option>
+	</select>
+	<button onclick="reset();">reset</button>
+	</div>
+	<div><h2 id="com">-</h2></div>
+	<div><h4 id="cl">-</h4></div>
+	<div>
+	<input id="ans" style="height: 30px;" onKeypress="javascript:if(event.keyCode==13) {bc()}">
+	<button onclick="bc();">확인</button>
+	</div><br>
+	<a href="https://www.youtube.com/channel/UCCnA-mq75U8OLiWBRIHVsdA"><span id="asdff" class="aa">-</span></a>
+	
+</body>
+<script>
+function rand(a,b){
+    return Math.floor(Math.random()*(b-a)+a);
+}
+let number=rand(1,100);
+let life=10;
+m(life,"cl")
+
+
+setInterval(function(){
+	m(rand(1000000,9999999),"asdff")
+},1);
+
+function bc(){
+	if(life<1){
+		alert("게임이 끝났습니다.");
+		return
+	}
+	let ans=parseInt(get("ans"))
+	if(ans==number){
+		alert("congrats!")
+		m("Correct!","com");
+		life=0;
+		m(life,"cl")
+		return
+	}
+	else if(ans>number){
+		m("down","com");
+	}
+	else if(ans<number){
+		m("up","com");
+	}
+	life-=1;
+	m(life,"cl")
+}
+function get(b){
+	return document.getElementById(b).value;
+}
+function reset(b){
+	life=parseInt(get("chan"))
+	switch(get("ran")){
+		case "1~100":
+			number=rand(1,100)
+			break;
+		case "1~1000":
+			number=rand(1,1000)
+			break;
+		case "1~10000":
+			number=rand(1,10000)
+			break;
+	}
+	m(life,"cl")
+	m("-","com")
+}
+function m(a,b){
+	document.getElementById(b).innerHTML=a
+}
+</script>
+</html>
